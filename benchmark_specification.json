@@ -1,0 +1,417 @@
+[
+  {
+    "field_name": "Workload Number",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "213"
+  },
+  {
+    "field_name": "Workload Name",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "GUPS Random Memory"
+  },
+  {
+    "field_name": "GPU Vendor",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "NVIDIA"
+  },
+  {
+    "field_name": "Repo Name",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "sys-bench-nvidia-gups-random-memory-ubu2404"
+  },
+  {
+    "field_name": "Main Goal",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Measure random 64-bit memory update performance"
+  },
+  {
+    "field_name": "Validation Objective",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Validates GUPS throughput and TLB/L3 miss rates from the C++ random-update benchmark"
+  },
+  {
+    "field_name": "Metrics",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "#1: Giga-updates score (giga_updates_score); #2: Random 64-bit update rate (updates_sec); #3: 8-byte payload update rate, GB/s (payload_update_gb_s)"
+  },
+  {
+    "field_name": "Command Tools Executed",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Compile gups.c; run bin/gups; optionally wrap with perf stat -e dTLB-load-misses,cache-misses,instructions"
+  },
+  {
+    "field_name": "Command Execution Details and Purpose",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Compile src/gups.c and run bin/gups with yaml table_size, num_updates, and seed, optionally wrapping with perf stat -e dTLB-load-misses,cache-misses,instructions, then derive GB/s as 8-byte updates/s, to measure random 64-bit update rate. Profile caps iterations at 2 / 8 / 24 regardless of a larger yaml request"
+  },
+  {
+    "field_name": "Command Methodology",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Compile src/gups.c, run bin/gups with yaml table_size, num_updates, and seed, and optionally wrap it with perf stat for dTLB-load-misses, cache-misses, and instructions. Derive GB/s as 8-byte updates per second. The profile caps iterations at 2, 8, or 24"
+  },
+  {
+    "field_name": "Execution Description With Parameters",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Builds src/gups.c (OpenMP C, not C++) into bin/gups and issues random 64-bit table updates. table_size: table bytes. num_updates: updates per iteration. num_iterations: requested loops, capped to 2/8/24 for smoke/baseline/extended. num_threads, seed, and numa_node come from yaml. Optional perf stat records dTLB-load-misses, cache-misses, and instructions. thread_affinity and page_size yaml fields are not applied as huge-page setup"
+  },
+  {
+    "field_name": "Execution Domain",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "CPU / System"
+  },
+  {
+    "field_name": "Workload Category",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Memory, Bandwidth & Data Movement"
+  },
+  {
+    "field_name": "Workload Type",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Benchmark"
+  },
+  {
+    "field_name": "Target Hardware",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "CPU"
+  },
+  {
+    "field_name": "GPU Model",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "H100 SXM 80GB"
+  },
+  {
+    "field_name": "Raw Output Format",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "CSV aggregate of the GUPS run, written as sample_index 0 and 1"
+  },
+  {
+    "field_name": "Primary Record Granularity",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "one aggregate row, written twice"
+  },
+  {
+    "field_name": "Raw Output Example",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "sample_index,status,giga_updates_score,tlb_miss_rate,l3_cache_miss_rate,random_64_bit_update_rate,updates_sec,payload_update_gb_s,num_threads,num_iterations_ran,num_iterations_requested,microarch_measured,error_message\n0,ok,0.01,0.02,0.4,1e7,1e7,0.08,8,2,8,1,"
+  },
+  {
+    "field_name": "run_benchmark Command Plus Options for Smoke Run",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "bash run_benchmark.sh --smoke --validate --numa-node 0 --num-threads 1 --thread-affinity node:0 --page-size 4KB --table-size 4194304 --num-updates 1000000 --num-iterations 1 --seed 42"
+  },
+  {
+    "field_name": "run_benchmark Command Plus Options for Baseline Run",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "bash run_benchmark.sh --baseline --validate --numa-node 0 --num-threads 4 --thread-affinity node:0 --page-size 4KB --table-size 268435456 --num-updates 50000000 --num-iterations 880 --seed 42"
+  },
+  {
+    "field_name": "run_benchmark Command Plus Options for Extended Run",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "bash run_benchmark.sh --extended --validate --numa-node 0 --num-threads 8 --thread-affinity node:0 --page-size 4KB --table-size 1073741824 --num-updates 200000000 --num-iterations 1240 --seed 42"
+  },
+  {
+    "field_name": "Output Fields / Metrics to Parse",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "giga_updates_score, tlb_miss_rate, l3_cache_miss_rate, random_64_bit_update_rate, updates_sec, payload_update_gb_s"
+  },
+  {
+    "field_name": "Success Criteria",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "giga_updates_score and payload_update_gb_s are finite and positive"
+  },
+  {
+    "field_name": "Parser and Normalization Notes",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "payload_update_gb_s is updates_sec * 8 / 1e9. TLB and l3_cache_miss_rate stay blank when perf did not count them. The aggregate row is written twice, as sample_index 0 and 1"
+  },
+  {
+    "field_name": "Hardware Config",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "NVIDIA H100 SXM host (20+ vCPUs, 128+ GB RAM, local NVMe), 1x H100 SXM (80 GB HBM3, sm_90, 132 SMs)"
+  },
+  {
+    "field_name": "GPU Architecture",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "sm_90 (NVIDIA Hopper H100)"
+  },
+  {
+    "field_name": "Framework",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Bash, SQLite, Python, PyYAML, C (not C++), GCC, OpenMP, Linux perf (optional)"
+  },
+  {
+    "field_name": "OS Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Ubuntu 24.04"
+  },
+  {
+    "field_name": "Kernel Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "kernel 6.8.0"
+  },
+  {
+    "field_name": "Runtime Language",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "C (OpenMP)"
+  },
+  {
+    "field_name": "Container Base Image",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "nvidia/cuda:12.8.1-cudnn-devel-ubuntu24.04"
+  },
+  {
+    "field_name": "Python Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Python 3.12.3"
+  },
+  {
+    "field_name": "GPU Runtime Version (was ROCm Version)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "CUDA 12.8"
+  },
+  {
+    "field_name": "BLAS Version (was rocBLAS version)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - rocBLAS not used"
+  },
+  {
+    "field_name": "Mistral-7B Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - Mistral not used"
+  },
+  {
+    "field_name": "PyTorch Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - PyTorch not used"
+  },
+  {
+    "field_name": "torchvision Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - torchvision not used"
+  },
+  {
+    "field_name": "vLLM Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - vLLM not used"
+  },
+  {
+    "field_name": "vLLM Wheel/Source Index",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - vLLM not used"
+  },
+  {
+    "field_name": "SGLang Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - SGLang not used"
+  },
+  {
+    "field_name": "SGLang Repository/Commit",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - SGLang not used"
+  },
+  {
+    "field_name": "Cmake Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "CMake 3.28.3"
+  },
+  {
+    "field_name": "g++ Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "g++: 14.2.0"
+  },
+  {
+    "field_name": "Known Runtime Constraints (<=35 Words Each)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Iterations are profile-capped (2/8/24). Blocked perf leaves TLB/L3 empty. Large tables stress memory and may need NUMA room"
+  },
+  {
+    "field_name": "Parameter_01",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "numa_node"
+  },
+  {
+    "field_name": "Parameter_02",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "num_threads"
+  },
+  {
+    "field_name": "Parameter_03",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "thread_affinity"
+  },
+  {
+    "field_name": "Parameter_04",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "page_size"
+  },
+  {
+    "field_name": "Parameter_05",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "table_size"
+  },
+  {
+    "field_name": "Parameter_06",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "num_updates"
+  },
+  {
+    "field_name": "Parameter_07",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "num_iterations"
+  },
+  {
+    "field_name": "Parameter_08",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "seed"
+  },
+  {
+    "field_name": "Parameter_09",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_10",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_11",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_12",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_13",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_14",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_15",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_16",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_17",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_18",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_19",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "Parameter_20",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "-"
+  },
+  {
+    "field_name": "GPU Architecutre ID",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "sm_90"
+  },
+  {
+    "field_name": "GPU Kernel Execution Runtime (HIP or CUDA)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "CUDA"
+  },
+  {
+    "field_name": "System Monitoring Tool",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - nvidia-smi / DCGM not used"
+  },
+  {
+    "field_name": "Validation & Diagnostics Suite",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - NVIDIA DCGM Diagnostics not used"
+  },
+  {
+    "field_name": "Collective Communication Library",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - NCCL not used"
+  },
+  {
+    "field_name": "Convolution or DNN Library",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - cuDNN not used"
+  },
+  {
+    "field_name": "Benchmark Schema Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "1.3.0"
+  },
+  {
+    "field_name": "Schema Last Updated",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "2026-09-05"
+  },
+  {
+    "field_name": "Installation and Execution Summary",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Compile src/gups.c and run bin/gups with yaml table_size, num_updates, and seed, optionally wrapping with perf stat -e dTLB-load-misses,cache-misses,instructions, then derive GB/s as 8-byte updates/s, to measure random 64-bit update rate. Profile caps iterations at 2 / 8 / 24 regardless of a larger yaml request"
+  },
+  {
+    "field_name": "Workload Command Line Executable",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Compile gups.c; run bin/gups; optionally wrap with perf stat -e dTLB-load-misses,cache-misses,instructions"
+  },
+  {
+    "field_name": "ROCm Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "CUDA 12.8"
+  },
+  {
+    "field_name": "rocBLAS Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - rocBLAS not used"
+  },
+  {
+    "field_name": "Execution Summary (Run and Measure)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Compile src/gups.c and run bin/gups with yaml table_size, num_updates, and seed, optionally wrapping with perf stat -e dTLB-load-misses,cache-misses,instructions, then derive GB/s as 8-byte updates/s, to measure random 64-bit update rate. Profile caps iterations at 2 / 8 / 24 regardless of a larger yaml request"
+  },
+  {
+    "field_name": "nVidia Porting Instructions (Reference Only)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Native NVIDIA CUDA workload. Execute on the stated Ubuntu release with the host NVIDIA driver and CUDA userspace. ROCm porting notes do not apply."
+  },
+  {
+    "field_name": "AMD nVidia Applicable",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "NVIDIA"
+  },
+  {
+    "field_name": "Model Context Protocols",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "None"
+  },
+  {
+    "field_name": "Profile Parameter Values",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Parameters_SmokeBaselineExtend",
+    "value": "{\"numa_node\": {\"smoke\": \"0\", \"baseline\": \"0\", \"extended\": \"0\", \"notes\": \"\"}, \"num_threads\": {\"smoke\": \"1\", \"baseline\": \"4\", \"extended\": \"8\", \"notes\": \"\"}, \"thread_affinity\": {\"smoke\": \"node:0\", \"baseline\": \"node:0\", \"extended\": \"node:0\", \"notes\": \"\"}, \"page_size\": {\"smoke\": \"4KB\", \"baseline\": \"4KB\", \"extended\": \"4KB\", \"notes\": \"\"}, \"table_size\": {\"smoke\": \"4194304\", \"baseline\": \"268435456\", \"extended\": \"1073741824\", \"notes\": \"\"}, \"num_updates\": {\"smoke\": \"1000000\", \"baseline\": \"50000000\", \"extended\": \"200000000\", \"notes\": \"\"}, \"num_iterations\": {\"smoke\": \"1\", \"baseline\": \"880\", \"extended\": \"1240\", \"notes\": \"2026-09-06: standardized num_iterations to baseline=200/extended=125 to match AMD twin (113/313) -- num_updates, table_size, and num_iterations are now identical across AMD/NVIDIA GUPS. Both values confirmed empirically on H100 (baseline 0:50 @ 200 iters; extended ~1:12 estimated @ 125 iters from a measured 0.575s/iter extended-scale rate). AMD's matching count targets ~15 min on MI300X; refine with overnight run data. | 2026-09-10: retimed from ledger (baseline observed 1:00/0:59 avg ~1:00 @ num_iterations=200) toward Gary's ~3 min target. Linear extrapolation, not yet re-measured. | 2026-09-10: retimed from ledger (extended observed 1:15 @ num_iterations=125) toward Gary's ~7 min target. NOTE: this breaks the 2026-09-06 AMD/NVIDIA GUPS standardization with 113/313 -- Gary's per-platform targets (NVIDIA 7 min vs AMD 12 min) now differ intentionally. | 2026-09-11 GARY_LEDGER (runtime_ledger_201_232): the 200/125 cross-vendor-matched counts (2026-09-06) were never actually targeting this workload's own 'at least 3 min baseline / 7 min extended' floors -- baseline measured 0:55/0:55/1:00 (avg 0:57, rate ~3.53 iters/s) and extended measured 1:16/1:18/1:19 (avg 1:18, rate ~1.61 iters/s; extended costs more per iteration since table_size/num_updates are both larger). Scaled baseline 200 x (240/57) ~= 850 to retarget ~4 min, and extended 125 x (510/78) ~= 820 to retarget ~8.5 min. This breaks the 2026-09-06 AMD/NVIDIA parity with 113/313 -- flagging for Gary rather than silently also changing 113/313, since AMD's own numbers weren't shown as failing. Unconfirmed by a fresh run. NOTE: supersedes the 2026-09-10 retiming note above -- that pass used a different observed sample and, for at least workload 220, appears to have targeted its stated duration as a floor to climb toward rather than the ceiling Gary actually asked for. | 2026-09-12 GARY_LEDGER (runtime_ledger_201_232): baseline (num_iterations=850, the 2026-09-11 retune) measured 1:00/1:01 (avg 60.5s) against a 'make it at least 3 min' target -- essentially unchanged from the pre-retune ~0:57 baseline, despite the 200->850 iteration increase; the prior retune does not appear to have taken effect in this run (or num_iterations is not scaling this stage linearly). Scaled from the actually-observed 850 iters at 60.5s: rate ~14.05 iters/s, 850 x (225/60.5) ~= 3160 to retarget ~3:45. extended (num_iterations=820, the 2026-09-11 retune) measured 5:02/5:13 (avg 307.5s) against a 'make it at least 8 min' target -- also well under the floor despite the prior retune. Rate ~2.67 iters/s. Scaled 820 x (600/307.5) ~= 1600 to retarget ~10:00 exactly. Both unconfirmed by a fresh run -- if these still undershoot, the 2026-09-11 note's rate assumption (and not just the target value) needs re-examination. | 2026-09-24 GARY_LEDGER (runtime_ledger_ALL_FOUR / Edit3, Gary questions; targets baseline ~4:00 in 3-5 min, extended ~11:30 in 8-15 min): 3160/1600 -> 880/1240. ROOT CAUSE of every earlier 213 retune not taking effect: gups-nvidia collect_workload.py capped iterations at 200 baseline / 500 extended, so 3160->200 (0:44-0:57) and 1600->500 (4:32-5:00). Cap raised to 5000/10000 in the same change. Rates at the capped counts: 0.26 s/iter baseline, 0.56 s/iter extended -> 880 (~3:50) / 1240 (~11:30). Unconfirmed by a fresh run.\"}, \"seed\": {\"smoke\": \"42\", \"baseline\": \"42\", \"extended\": \"42\", \"notes\": \"\"}}"
+  },
+  {
+    "field_name": "Profile Command Authorship",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Parameters_SmokeBaselineExtend",
+    "value": "Workload_Definitions run_benchmark command columns are generated from Parameters_SmokeBaselineExtend. Author parameter values on the Parameters_SmokeBaselineExtend sheet only. Do not invent smoke/baseline/extended sweep numbers. Sweep/list flags in the command cells are documentary; omit those flags so config/benchmark_config.yaml expands cases."
+  }
+]
