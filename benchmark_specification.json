@@ -15,6 +15,11 @@
     "value": "NVIDIA"
   },
   {
+    "field_name": "OS Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Ubuntu 24.04"
+  },
+  {
     "field_name": "Repo Name",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "sys-bench-nvidia-gups-random-memory-ubu2404"
@@ -138,11 +143,6 @@
     "field_name": "Framework",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "Bash, SQLite, Python, PyYAML, C (not C++), GCC, OpenMP, Linux perf (optional)"
-  },
-  {
-    "field_name": "OS Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Ubuntu 24.04"
   },
   {
     "field_name": "Kernel Version",
