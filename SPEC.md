@@ -14,7 +14,7 @@ Builds src/gups.c (OpenMP C, not C++) into bin/gups and issues random 64-bit tab
 | page_size | `--page-size` | smoke=4KB, baseline=4KB, extended=4KB | 4KB | From Parameter list; see Execution Description With Parameters. |
 | table_size | `--table-size` | smoke=4194304, baseline=268435456, extended=1073741824 | 268435456 | From Parameter list; see Execution Description With Parameters. |
 | num_updates | `--num-updates` | smoke=1000000, baseline=50000000, extended=200000000 | 50000000 | From Parameter list; see Execution Description With Parameters. |
-| num_iterations | `--num-iterations` | smoke=1, baseline=880, extended=1240 | 880 | From Parameter list; see Execution Description With Parameters. |
+| num_iterations | `--num-iterations` | smoke=1, baseline=617, extended=980 | 617 | From Parameter list; see Execution Description With Parameters. |
 | seed | `--seed` | smoke=42, baseline=42, extended=42 | 42 | From Parameter list; see Execution Description With Parameters. |
 
 ## Invocation
