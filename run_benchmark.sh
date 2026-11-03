@@ -48,7 +48,6 @@ Workload options:
   --numa-node <value>            Override numa_node
   --num-threads <value>            Override num_threads
   --thread-affinity <value>            Override thread_affinity
-  --page-size <value>            Override page_size
   --table-size <value>            Override table_size
   --num-updates <value>            Override num_updates
   --num-iterations <value>            Override num_iterations
@@ -89,7 +88,6 @@ SAVE_OPTIONS_FILE=""
 NUMA_NODE=""
 NUM_THREADS=""
 THREAD_AFFINITY=""
-PAGE_SIZE=""
 TABLE_SIZE=""
 NUM_UPDATES=""
 NUM_ITERATIONS=""
@@ -117,7 +115,6 @@ while [[ $# -gt 0 ]]; do
     --numa-node) NUMA_NODE="${2:-}"; shift 2 ;;
     --num-threads) NUM_THREADS="${2:-}"; shift 2 ;;
     --thread-affinity) THREAD_AFFINITY="${2:-}"; shift 2 ;;
-    --page-size) PAGE_SIZE="${2:-}"; shift 2 ;;
     --table-size) TABLE_SIZE="${2:-}"; shift 2 ;;
     --num-updates) NUM_UPDATES="${2:-}"; shift 2 ;;
     --num-iterations) NUM_ITERATIONS="${2:-}"; shift 2 ;;
@@ -163,7 +160,6 @@ PY
 NUMA_NODE="${NUMA_NODE:-$(yaml_get numa_node)}"
 NUM_THREADS="${NUM_THREADS:-$(yaml_get num_threads)}"
 THREAD_AFFINITY="${THREAD_AFFINITY:-$(yaml_get thread_affinity)}"
-PAGE_SIZE="${PAGE_SIZE:-$(yaml_get page_size)}"
 TABLE_SIZE="${TABLE_SIZE:-$(yaml_get table_size)}"
 NUM_UPDATES="${NUM_UPDATES:-$(yaml_get num_updates)}"
 NUM_ITERATIONS="${NUM_ITERATIONS:-$(yaml_get num_iterations)}"
@@ -176,7 +172,6 @@ BENCHMARK_RUN_COMMAND="bash run_benchmark.sh --${PROFILE}"
 [[ -n "${NUMA_NODE}" ]] && BENCHMARK_RUN_COMMAND+=" --numa-node $(printf %q "${NUMA_NODE}")"
 [[ -n "${NUM_THREADS}" ]] && BENCHMARK_RUN_COMMAND+=" --num-threads $(printf %q "${NUM_THREADS}")"
 [[ -n "${THREAD_AFFINITY}" ]] && BENCHMARK_RUN_COMMAND+=" --thread-affinity $(printf %q "${THREAD_AFFINITY}")"
-[[ -n "${PAGE_SIZE}" ]] && BENCHMARK_RUN_COMMAND+=" --page-size $(printf %q "${PAGE_SIZE}")"
 [[ -n "${TABLE_SIZE}" ]] && BENCHMARK_RUN_COMMAND+=" --table-size $(printf %q "${TABLE_SIZE}")"
 [[ -n "${NUM_UPDATES}" ]] && BENCHMARK_RUN_COMMAND+=" --num-updates $(printf %q "${NUM_UPDATES}")"
 [[ -n "${NUM_ITERATIONS}" ]] && BENCHMARK_RUN_COMMAND+=" --num-iterations $(printf %q "${NUM_ITERATIONS}")"
@@ -226,7 +221,6 @@ run_collection() {
   grep -q -- '--numa-node' <<<"${help}" && collect_args+=(--numa-node "${NUMA_NODE}")
   grep -q -- '--num-threads' <<<"${help}" && collect_args+=(--num-threads "${NUM_THREADS}")
   grep -q -- '--thread-affinity' <<<"${help}" && collect_args+=(--thread-affinity "${THREAD_AFFINITY}")
-  grep -q -- '--page-size' <<<"${help}" && collect_args+=(--page-size "${PAGE_SIZE}")
   grep -q -- '--table-size' <<<"${help}" && collect_args+=(--table-size "${TABLE_SIZE}")
   grep -q -- '--num-updates' <<<"${help}" && collect_args+=(--num-updates "${NUM_UPDATES}")
   grep -q -- '--num-iterations' <<<"${help}" && collect_args+=(--num-iterations "${NUM_ITERATIONS}")

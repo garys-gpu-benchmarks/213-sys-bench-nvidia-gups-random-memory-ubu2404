@@ -14,7 +14,6 @@ sweep:
     baseline: 4
     extended: 8
   thread_affinity: node:0
-  page_size: 4KB
   table_size:
     smoke: 4194304
     baseline: 268435456
