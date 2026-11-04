@@ -25,6 +25,11 @@
     "value": "sys-bench-nvidia-gups-random-memory-ubu2404"
   },
   {
+    "field_name": "Repo Directory Name",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "213-sys-bench-nvidia-gups-random-memory-ubu2404"
+  },
+  {
     "field_name": "Main Goal",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "Measure random 64-bit memory update performance"
