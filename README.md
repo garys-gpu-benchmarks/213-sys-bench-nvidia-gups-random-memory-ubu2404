@@ -11,7 +11,7 @@ Target: Ubuntu 24.04 · NVIDIA · see Hardware Requirements. This is a host benc
 git clone https://github.com/garys-gpu-benchmarks/213-sys-bench-nvidia-gups-random-memory-ubu2404.git
 cd 213-sys-bench-nvidia-gups-random-memory-ubu2404
 sudo bash setup.sh --assume-yes
-bash run_benchmark.sh --profile smoke --validate
+bash run_benchmark.sh --smoke --validate
 ```
 Results are written to `results/benchmark.db` and `results/summary.json`.
 
@@ -34,7 +34,7 @@ git clone --recurse-submodules https://github.com/garys-gpu-benchmarks/bundle-nv
   && cd /opt/benchmarks \
   && ./run_benchmark_suite.sh --list \
   && cd /opt/benchmarks/213-sys-bench-nvidia-gups-random-memory-ubu2404 \
-  && bash run_benchmark.sh --profile smoke --validate \
+  && bash run_benchmark.sh --smoke --validate \
   && cd /opt/benchmarks \
   && echo "Done: 32 workloads in /opt/benchmarks; 213-sys-bench-nvidia-gups-random-memory-ubu2404 smoke run passed. Next: ./run_benchmark_suite.sh --help"
 ```
