@@ -32,9 +32,16 @@ Profiles (default: --smoke):
 Parameters (override the profile's value):
   --numa-node <n>               NUMA node selected for placement (smoke/baseline/extended: 0)
   --num-threads <n>             Execution threads issuing work (smoke 1, baseline 4, extended 8)
-  --thread-affinity <value>     Policy or CPU/NUMA placement for execution threads (smoke/baseline/extended: node:0)
-  --table-size <value>          Shared workload parameter (smoke 4194304, baseline 268435456, extended 1073741824)
-  --num-updates <value>         Shared workload parameter (smoke 1000000, baseline 50000000, extended 200000000)
+  --thread-affinity <value>     Policy or CPU/NUMA placement for execution threads
+                                  all profiles: node:0
+  --table-size <value>          Shared workload parameter
+                                  smoke:    4194304
+                                  baseline: 268435456
+                                  extended: 1073741824
+  --num-updates <value>         Shared workload parameter
+                                  smoke:    1000000
+                                  baseline: 50000000
+                                  extended: 200000000
   --num-iterations <n>          Number of timed repetitions (smoke 1, baseline 617, extended 980)
   --seed <n>                    Random seed used for reproducibility (smoke/baseline/extended: 42)
 
