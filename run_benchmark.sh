@@ -16,12 +16,11 @@ capture_benchmark_run_command_submitted "$@"
 
 usage() {
   cat <<'USAGE'
+
 Usage: bash run_benchmark.sh [OPTIONS]
 
 Workload Name:          GUPS Random Memory.
 Main Goal:              Measure random 64-bit memory update performance.
-Validation Objective:   Validates GUPS throughput and TLB/L3 miss rates from the C++ random-update
-                        benchmark.
 Command Tools Executed: Compile gups.c; run bin/gups; optionally wrap with perf stat -e
                         dTLB-load-misses,cache-misses,instructions.
 
