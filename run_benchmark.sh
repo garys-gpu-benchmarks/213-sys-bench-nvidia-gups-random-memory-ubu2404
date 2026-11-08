@@ -19,10 +19,10 @@ usage() {
 
 Usage: bash run_benchmark.sh [OPTIONS]
 
-Workload Name:          GUPS Random Memory.
-Main Goal:              Measure random 64-bit memory update performance.
+Workload Name:          GUPS Random Memory
+Main Goal:              Measure random 64-bit memory update performance
 Command Tools Executed: Compile gups.c; run bin/gups; optionally wrap with perf stat -e
-                        dTLB-load-misses,cache-misses,instructions.
+                        dTLB-load-misses,cache-misses,instructions
 
 Profiles (default: --smoke):
   --smoke                       Run smoke profile
