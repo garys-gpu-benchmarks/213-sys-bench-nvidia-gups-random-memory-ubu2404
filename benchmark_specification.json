@@ -270,12 +270,12 @@
     "value": "Python 3.12.3"
   },
   {
-    "field_name": "GPU Runtime Version (was ROCm Version)",
+    "field_name": "GPU Runtime Version",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "CUDA 12.6 (nvcc 12.6.85 preinstalled in the container; setup installs 12.8 only when nvcc is missing). Driver 580.159.04 reports CUDA 13.0"
+    "value": "CUDA 12.8 (setup installs it unless /usr/local/cuda-12.8/bin/nvcc already reports 12.8, and points /usr/local/cuda at it; a preinstalled nvcc 12.6.85 stays on disk). Driver 580.159.04 reports CUDA 13.0"
   },
   {
-    "field_name": "BLAS Version (was rocBLAS version)",
+    "field_name": "BLAS Version",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "N/A - cuBLAS not used"
   },
@@ -382,7 +382,7 @@
   {
     "field_name": "ROCm Version",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "CUDA 12.6 (nvcc 12.6.85 preinstalled in the container; setup installs 12.8 only when nvcc is missing). Driver 580.159.04 reports CUDA 13.0"
+    "value": "CUDA 12.8 (setup installs it unless /usr/local/cuda-12.8/bin/nvcc already reports 12.8, and points /usr/local/cuda at it; a preinstalled nvcc 12.6.85 stays on disk). Driver 580.159.04 reports CUDA 13.0"
   },
   {
     "field_name": "rocBLAS Version",
