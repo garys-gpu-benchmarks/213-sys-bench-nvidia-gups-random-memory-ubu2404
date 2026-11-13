@@ -40,6 +40,11 @@
     "value": "Compile gups.c; run bin/gups; optionally wrap with perf stat -e dTLB-load-misses,cache-misses,instructions"
   },
   {
+    "field_name": "Execution Description With Parameters",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Builds src/gups.c (OpenMP C, not C++) into bin/gups and issues random 64-bit table updates. table_size: table bytes. num_updates: updates per iteration. num_iterations: requested loops, capped to 2/8/24 for smoke/baseline/extended. num_threads, seed, and numa_node come from yaml. Optional perf stat records dTLB-load-misses, cache-misses, and instructions. thread_affinity and page_size yaml fields are not applied as huge-page setup"
+  },
+  {
     "field_name": "Metrics",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "#1: Giga-updates score (giga_updates_score); #2: Random 64-bit update rate (updates_sec); #3: 8-byte payload update rate, GB/s (payload_update_gb_s)"
@@ -173,11 +178,6 @@
     "field_name": "Command Methodology",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "Compile src/gups.c, run bin/gups with yaml table_size, num_updates, and seed, and optionally wrap it with perf stat for dTLB-load-misses, cache-misses, and instructions. Derive GB/s as 8-byte updates per second. The profile caps iterations at 2, 8, or 24"
-  },
-  {
-    "field_name": "Execution Description With Parameters",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Builds src/gups.c (OpenMP C, not C++) into bin/gups and issues random 64-bit table updates. table_size: table bytes. num_updates: updates per iteration. num_iterations: requested loops, capped to 2/8/24 for smoke/baseline/extended. num_threads, seed, and numa_node come from yaml. Optional perf stat records dTLB-load-misses, cache-misses, and instructions. thread_affinity and page_size yaml fields are not applied as huge-page setup"
   },
   {
     "field_name": "Execution Domain",
