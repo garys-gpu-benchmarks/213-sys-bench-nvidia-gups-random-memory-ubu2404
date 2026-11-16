@@ -12,7 +12,7 @@ On an Ubuntu 24.04 host, as root or with sudo:
 ```bash
 git clone https://github.com/garys-gpu-benchmarks/213-sys-bench-nvidia-gups-random-memory-ubu2404.git
 cd 213-sys-bench-nvidia-gups-random-memory-ubu2404
-sudo bash setup.sh --assume-yes
+sudo bash run_setup.sh --assume-yes
 bash run_benchmark.sh --smoke
 ```
 
@@ -67,8 +67,8 @@ Every run is checked for completeness and against any `thresholds:` or `baseline
 
 ## Requirements
 
-- Ubuntu 24.04, root or sudo for `setup.sh`
-- C, GCC, OpenMP, Linux perf (optional), Python 3.12. `setup.sh` installs what is missing; Python packages go into a repo-local `.venv`.
+- Ubuntu 24.04, root or sudo for `run_setup.sh`
+- C, GCC, OpenMP, Linux perf (optional), Python 3.12. `run_setup.sh` installs what is missing; Python packages go into a repo-local `.venv`.
 
 ## Run the Whole Bundle
 
@@ -88,14 +88,15 @@ Other platforms: [AMD 24.04](https://github.com/garys-gpu-benchmarks/bundle-amd-
 
 ## Troubleshooting
 
-- **SSH dropped during setup:** reconnect and run `sudo bash setup.sh --assume-yes` again. It resumes; do not delete `.venv` or `.cache`.
+- **SSH dropped during setup:** reconnect and run `sudo bash run_setup.sh --assume-yes` again. It resumes; do not delete `.venv` or `.cache`.
 - **A metric reads `na`:** the run could not measure it on this host. The reason is in the run's `metrics_summary.txt` and `errors_info.txt`; see also [Notes](#notes).
 
 ## Repository Layout
 
 ```text
 .
-├── setup.sh                      # installs dependencies and builds the benchmark
+├── run_setup.sh                  # installs dependencies and builds the benchmark
+├── setup.sh                      # runs run_setup.sh (its earlier name)
 ├── run_benchmark.sh              # runs one profile, parses, validates
 ├── show_metrics.sh               # prints this workload's ledger rows
 ├── list_runs.sh                  # prints every run in the ledger
